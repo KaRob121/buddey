@@ -1,15 +1,24 @@
 import React from 'react'
+import '../styles/Bills.css'
 
 function Bills() {
   const [bill, setBill] = React.useState({
-    billName: "",
+    name: "",
     amountDue: "",
     dueDate: ""
   })
 
   const [allBills, setAllBills] = React.useState([])
 
-  const billsList = allBills.map(bill => <h1>Hello</h1>)
+  const billsList = allBills.map(bill => {
+    return (
+      <div className="Bills--list">
+        <h1>{ bill.name }</h1>
+        <h1>{ bill.amountDue}</h1>
+        <h1>{ bill.dueDate }</h1>
+      </div>
+    )
+  })
 
   function addBill(event) {
     setAllBills(prevAllBills => {
@@ -35,7 +44,7 @@ function Bills() {
       <input 
         type="text" 
         placeholder="Bill Name"
-        name="billName"
+        name="name"
         value={ bill.billName }
         onChange={ handleChange }
       />
