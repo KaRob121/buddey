@@ -11,12 +11,16 @@ function Bills() {
   const [allBills, setAllBills] = React.useState([])
 
   const billsList = allBills.map((bill, ind) => {
+    const currencyFormatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
     return (
       <div className="Bills--bill" key={ ind } >
         <button onClick={ () => removeBill(ind) }>x</button>
         <h1>{ bill.name }</h1>
-        <h1>{ bill.amountDue}</h1>
-        <h1>{ bill.dueDate }</h1>
+        <h1>{ currencyFormatter.format(bill.amountDue) }</h1>
+        <h1>{ new Date(bill.dueDate).toLocaleDateString("en-US") }</h1>
       </div>
     )
   })
@@ -28,8 +32,6 @@ function Bills() {
         ...prevAllBills
       ]
     })
-
-
   }
 
   function removeBill(ind) {
