@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/Bills.css'
+import BillsList from './BillsList'
 
 function Bills() {
   const [bill, setBill] = React.useState({
@@ -16,11 +16,11 @@ function Bills() {
       currency: 'USD',
     });
     return (
-      <div className="Bills--bill" key={ ind } >
-        <button onClick={ () => removeBill(ind) }>x</button>
-        <h1>{ bill.name }</h1>
-        <h1>{ currencyFormatter.format(bill.amountDue) }</h1>
-        <h1>{ new Date(bill.dueDate).toLocaleDateString("en-US") }</h1>
+      <div className="Bills--bill" key={ind} >
+        <button onClick={() => removeBill(ind)}>x</button>
+        <h1>{bill.name}</h1>
+        <h1>{currencyFormatter.format(bill.amountDue)}</h1>
+        <h1>{new Date(bill.dueDate).toLocaleDateString("en-US")}</h1>
       </div>
     )
   })
@@ -54,32 +54,33 @@ function Bills() {
 
   return (
     <div className="Bills">
-      <input 
-        type="text" 
+      <input
+        type="text"
         placeholder="Bill Name"
         name="name"
-        value={ bill.billName }
-        onChange={ handleChange }
+        value={bill.billName}
+        onChange={handleChange}
       />
-      <input 
-        type="number" 
-        step="0.01" 
+      <input
+        type="number"
+        step="0.01"
         placeholder="Amount Due"
         name="amountDue"
-        value={ bill.amountDue }
-        onChange={ handleChange }
+        value={bill.amountDue}
+        onChange={handleChange}
       />
-      <input 
-        type="date" 
+      <input
+        type="date"
         placeholder="Due Date"
         name="dueDate"
-        value={ bill.dueDate }
-        onChange={ handleChange }
+        value={bill.dueDate}
+        onChange={handleChange}
       />
-      <button type="submit" onClick={ addBill }>Add a new bill</button>
-      <div className="Bills-list">
-        { billsList }
-      </div>
+      <button type="submit" onClick={addBill}>Add a new bill</button>
+      <BillsList
+        allBills={allBills}
+        removeBill={removeBill}
+      />
     </div>
   )
 }

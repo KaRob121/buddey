@@ -1,0 +1,11 @@
+.BillsList--header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 100px;
+}
+
+.BillsList--bill {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 100px;
+}
