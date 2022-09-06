@@ -12,7 +12,8 @@ function BillsList(props) {
         <button onClick={() => props.removeBill(ind)}>x</button>
         <h3>{bill.name}</h3>
         <h3>{currencyFormatter.format(bill.amountDue)}</h3>
-        <h3>{new Date(bill.dueDate).toLocaleDateString("en-US")}</h3>
+        {/* adding 'T00:00:00' to dueDate string fixes issue of date being one day off} */}
+        <h3>{new Date(bill.dueDate + 'T00:00:00').toLocaleDateString("en-US")}</h3>
       </div>
     )
   })
@@ -20,9 +21,18 @@ function BillsList(props) {
   return (
     <div className="BillsList">
       <div className="BillsList--header">
-        <h2>Bill Name</h2>
-        <h2>Amount Due</h2>
-        <h2>Due Date</h2>
+        <div>
+          <h2>Bill Name</h2>
+          <button onClick={() => props.sortByName()}>Sort</button>
+        </div>
+        <div>
+          <h2>Amount Due</h2>
+          <button onClick={() => props.sortByAmount()}>Sort</button>
+        </div>
+        <div>
+          <h2>Due Date</h2>
+          <button onClick={() => props.sortByDate()}>Sort</button>
+        </div>
       </div>
       {billsList}
     </div>

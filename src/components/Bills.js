@@ -10,21 +10,8 @@ function Bills() {
 
   const [allBills, setAllBills] = React.useState([])
 
-  const billsList = allBills.map((bill, ind) => {
-    const currencyFormatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
-    return (
-      <div className="Bills--bill" key={ind} >
-        <button onClick={() => removeBill(ind)}>x</button>
-        <h1>{bill.name}</h1>
-        <h1>{currencyFormatter.format(bill.amountDue)}</h1>
-        <h1>{new Date(bill.dueDate).toLocaleDateString("en-US")}</h1>
-      </div>
-    )
-  })
-
+  // Parameters: None
+  // Purpose: Adds a new bill object to the first index of bills list.
   function addBill() {
     setAllBills(prevAllBills => {
       return [
@@ -34,11 +21,46 @@ function Bills() {
     })
   }
 
+  // Parameters: ind - The index of the bill object to remove from bills list.
+  // Purpose: Removes a bill from bills list.
   function removeBill(ind) {
     setAllBills(prevAllBills => {
       const newList = [...prevAllBills]
       newList.splice(ind, 1)
       return newList
+    })
+  }
+
+  // Parameters: None
+  // Purpose: Sorts the bill list by name.
+  function sortByName(ind) {
+    setAllBills(prevAllBills => {
+      const sortedByName = [...prevAllBills].sort((a,b) => {
+        return a.name >= b.name ? 1 : -1
+      })
+      return sortedByName
+    })
+  }
+
+  // Parameters: None
+  // Purpose: Sorts the bill list by amount due.
+  function sortByAmount(ind) {
+    setAllBills(prevAllBills => {
+      const sortedByAmount = [...prevAllBills].sort((a,b) => {
+        return a.amountDue - b.amountDue
+      })
+      return sortedByAmount
+    })
+  }
+
+  // Parameters: None
+  // Purpose: Sorts the bill list by due date.
+  function sortByDate(ind) {
+    setAllBills(prevAllBills => {
+      const sortedByDate = [...prevAllBills].sort((a,b) => {
+        return a.dueDate > b.dueDate ? 1 : -1
+      })
+      return sortedByDate
     })
   }
 
@@ -80,6 +102,9 @@ function Bills() {
       <BillsList
         allBills={allBills}
         removeBill={removeBill}
+        sortByName={sortByName}
+        sortByAmount={sortByAmount}
+        sortByDate={sortByDate}
       />
     </div>
   )
