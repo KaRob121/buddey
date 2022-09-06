@@ -5,7 +5,8 @@ function Bills() {
   const [bill, setBill] = React.useState({
     name: "",
     amountDue: "",
-    dueDate: ""
+    dueDate: "",
+    status: "unpaid"
   })
 
   const [allBills, setAllBills] = React.useState([])
@@ -58,7 +59,7 @@ function Bills() {
   function sortByDate(ind) {
     setAllBills(prevAllBills => {
       const sortedByDate = [...prevAllBills].sort((a,b) => {
-        return a.dueDate > b.dueDate ? 1 : -1
+        return a.dueDate >= b.dueDate ? 1 : -1
       })
       return sortedByDate
     })
@@ -105,6 +106,7 @@ function Bills() {
         sortByName={sortByName}
         sortByAmount={sortByAmount}
         sortByDate={sortByDate}
+        handleChange={handleChange}
       />
     </div>
   )

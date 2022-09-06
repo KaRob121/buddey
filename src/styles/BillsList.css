@@ -6,6 +6,10 @@
 
 .BillsList--bill {
     display: flex;
-    justify-content: space-between;
-    padding: 0 100px;
+}
+
+.BillsList--billInfo {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
 }
