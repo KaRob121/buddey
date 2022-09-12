@@ -18,9 +18,11 @@ function BillsList(props) {
             onChange={props.handleChange}
           />
           <h3>{bill.name}</h3>
-          <h3>{currencyFormatter.format(bill.amountDue)}</h3>
+          <h3>{bill.amount_due}</h3>
+          <h3>{new Date(bill.due_date).toLocaleDateString("en-US")}</h3>
+          {/* <h3>{currencyFormatter.format(bill.amount_due)}</h3> */}
           {/* adding 'T00:00:00' to dueDate string fixes issue of date being one day off} */}
-          <h3>{new Date(bill.dueDate + 'T00:00:00').toLocaleDateString("en-US")}</h3>
+          {/* <h3>{new Date(bill.dueDate + 'T00:00:00').toLocaleDateString("en-US")}</h3> */}
           </div>
       </div>
     )

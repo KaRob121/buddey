@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BillsList from './BillsList'
 
 function Bills() {
@@ -11,9 +11,42 @@ function Bills() {
 
   const [allBills, setAllBills] = React.useState([])
 
+  useEffect(() => {
+    getBills();
+  }, []);
+
+  async function getBills() {
+    try {
+      const response = await fetch ("http://localhost:3001/bills")
+      const jsonData = await response.json()
+
+      setAllBills(jsonData)
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
+
   // Parameters: None
-  // Purpose: Adds a new bill object to the first index of bills list.
-  function addBill() {
+  // Purpose: Create a new bill object to the first index of bills list.
+  async function createBill(e) {
+    // prevents page refresh when submitting form
+    e.preventDefault()
+
+    // send created bill to database
+    try {
+      const body = JSON.stringify(bill)
+      const response = await fetch("http://localhost:3001/bills", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: body
+      })
+
+      window.location = "/"
+    } catch (error) {
+      console.error(error.message)
+    }
+
+    // update state
     setAllBills(prevAllBills => {
       return [
         bill,
@@ -48,7 +81,9 @@ function Bills() {
   function sortByAmount(ind) {
     setAllBills(prevAllBills => {
       const sortedByAmount = [...prevAllBills].sort((a,b) => {
-        return a.amountDue - b.amountDue
+        let currAsNumber1 = Number(a.amount_due.replace(/[^0-9.-]+/g,""))
+        let currAsNumber2 = Number(b.amount_due.replace(/[^0-9.-]+/g,""))
+        return currAsNumber1 - currAsNumber2
       })
       return sortedByAmount
     })
@@ -59,7 +94,7 @@ function Bills() {
   function sortByDate(ind) {
     setAllBills(prevAllBills => {
       const sortedByDate = [...prevAllBills].sort((a,b) => {
-        return a.dueDate >= b.dueDate ? 1 : -1
+        return a.due_date >= b.due_date ? 1 : -1
       })
       return sortedByDate
     })
@@ -77,29 +112,32 @@ function Bills() {
 
   return (
     <div className="Bills">
-      <input
-        type="text"
-        placeholder="Bill Name"
-        name="name"
-        value={bill.billName}
-        onChange={handleChange}
-      />
-      <input
-        type="number"
-        step="0.01"
-        placeholder="Amount Due"
-        name="amountDue"
-        value={bill.amountDue}
-        onChange={handleChange}
-      />
-      <input
-        type="date"
-        placeholder="Due Date"
-        name="dueDate"
-        value={bill.dueDate}
-        onChange={handleChange}
-      />
-      <button type="submit" onClick={addBill}>Add a new bill</button>
+      <form onSubmit={createBill}>
+        <input
+          type="text"
+          placeholder="Bill Name"
+          name="name"
+          value={bill.billName}
+          onChange={handleChange}
+        />
+        <input
+          type="number"
+          step="0.01"
+          placeholder="Amount Due"
+          name="amountDue"
+          value={bill.amountDue}
+          onChange={handleChange}
+        />
+        <input
+          type="date"
+          placeholder="Due Date"
+          name="dueDate"
+          value={bill.dueDate}
+          onChange={handleChange}
+        />
+        <button type="submit">Add a new bill</button>
+      </form>
+      
       <BillsList
         allBills={allBills}
         removeBill={removeBill}
