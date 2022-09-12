@@ -1,4 +1,4 @@
-.BillsList--header {
+/* .BillsList--header {
     display: flex;
     justify-content: space-between;
     padding: 0 100px;
@@ -11,5 +11,19 @@
 .BillsList--billInfo {
     display: flex;
     justify-content: space-around;
+    width: 100%;
+} */
+
+/* .BillsList--billInfo {
+    display: grid;
+    width: 75%;
+} */
+
+table {
+    margin: 50px auto 0 auto;
+    width: 75%
+}
+
+tr {
     width: 100%;
 }
