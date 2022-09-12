@@ -28,9 +28,9 @@ function Bills() {
 
   // Parameters: None
   // Purpose: Create a new bill object to the first index of bills list.
-  async function createBill(e) {
+  async function createBill(event) {
     // prevents page refresh when submitting form
-    e.preventDefault()
+    event.preventDefault()
 
     // send created bill to database
     try {
@@ -55,14 +55,24 @@ function Bills() {
     })
   }
 
-  // Parameters: ind - The index of the bill object to remove from bills list.
+  // Parameters: billId - The id of the bill object to remove from bills list.
   // Purpose: Removes a bill from bills list.
-  function removeBill(ind) {
-    setAllBills(prevAllBills => {
-      const newList = [...prevAllBills]
-      newList.splice(ind, 1)
-      return newList
-    })
+  async function removeBill(billId) {
+    try {
+      const removeBill = await fetch(`http://localhost:3001/bills/${billId}`, {
+        method: "DELETE"
+      })
+
+      setAllBills(allBills.filter(bill => bill.bill_id !== billId))
+    } catch (error) {
+      console.error(error.message)
+    }
+
+    // setAllBills(prevAllBills => {
+    //   const newList = [...prevAllBills]
+    //   newList.splice(ind, 1)
+    //   return newList
+    // })
   }
 
   // Parameters: None

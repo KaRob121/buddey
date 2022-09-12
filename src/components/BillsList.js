@@ -8,8 +8,8 @@ function BillsList(props) {
       currency: 'USD',
     });
     return (
-      <div className="BillsList--bill" key={ind} >
-        <button onClick={() => props.removeBill(ind)}>x</button>
+      <div className="BillsList--bill" key={bill.bill_id} >
+        <button onClick={() => props.removeBill(bill.bill_id)}>x</button>
         <div className="BillsList--billInfo">
           <input
             type="checkbox"
