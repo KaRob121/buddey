@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import BillsList from './BillsList'
+import '../styles/Bills.css'
 
 function Bills() {
   const [bill, setBill] = React.useState({
@@ -67,12 +68,6 @@ function Bills() {
     } catch (error) {
       console.error(error.message)
     }
-
-    // setAllBills(prevAllBills => {
-    //   const newList = [...prevAllBills]
-    //   newList.splice(ind, 1)
-    //   return newList
-    // })
   }
 
   // Parameters: None
@@ -122,32 +117,7 @@ function Bills() {
 
   return (
     <div className="Bills">
-      <form onSubmit={createBill}>
-        <input
-          type="text"
-          placeholder="Bill Name"
-          name="name"
-          value={bill.billName}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          step="0.01"
-          placeholder="Amount Due"
-          name="amountDue"
-          value={bill.amountDue}
-          onChange={handleChange}
-        />
-        <input
-          type="date"
-          placeholder="Due Date"
-          name="dueDate"
-          value={bill.dueDate}
-          onChange={handleChange}
-        />
-        <button type="submit">Add a new bill</button>
-      </form>
-      
+      <h1>Your bills</h1>
       <BillsList
         allBills={allBills}
         removeBill={removeBill}
@@ -156,6 +126,36 @@ function Bills() {
         sortByDate={sortByDate}
         handleChange={handleChange}
       />
+      <h1>Add a new bill</h1>
+      <form onSubmit={createBill}>
+        <div className="form-inputs">
+          <input
+            type="text"
+            placeholder="Bill Name"
+            name="name"
+            value={bill.billName}
+            onChange={handleChange}
+          />
+          <input
+            type="number"
+            step="0.01"
+            placeholder="Amount Due"
+            name="amountDue"
+            value={bill.amountDue}
+            onChange={handleChange}
+          />
+          <input
+            type="date"
+            placeholder="Due Date"
+            name="dueDate"
+            value={bill.dueDate}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit">Add a new bill</button>
+      </form>
+      
+      
     </div>
   )
 }

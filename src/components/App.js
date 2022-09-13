@@ -1,10 +1,11 @@
+import Header from './Header.js'
 import Bills from './Bills.js'
 import '../styles/App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>Buddey</h1>
+      <Header />
       <Bills />
     </div>
   );

@@ -1,0 +1,19 @@
+.Bills > h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+form {
+    width: 75%;
+    margin: 0 auto;
+}
+
+form > button {
+    margin-top: 1em;
+    float: right;
+}
+
+.form-inputs {
+    display: flex;
+    justify-content: space-between;
+}
+
