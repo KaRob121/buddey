@@ -1,7 +1,3 @@
-.Bills > h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
-}
-
 form {
     width: 75%;
     margin: 0 auto;
@@ -10,6 +6,14 @@ form {
 form > button {
     margin-top: 1em;
     float: right;
+}
+
+.Bills {
+    padding-right: 25px;
+}
+
+.Bills h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
 }
 
 .form-inputs {

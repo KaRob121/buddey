@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import BillsList from './BillsList'
+import EmptyBillsList from './EmptyBillsList'
 import '../styles/Bills.css'
 
 function Bills() {
@@ -117,15 +118,20 @@ function Bills() {
 
   return (
     <div className="Bills">
-      <h1>Your bills</h1>
-      <BillsList
-        allBills={allBills}
-        removeBill={removeBill}
-        sortByName={sortByName}
-        sortByAmount={sortByAmount}
-        sortByDate={sortByDate}
-        handleChange={handleChange}
-      />
+      <h1>Bills</h1>
+      {
+        allBills.length == 0 ? 
+          <EmptyBillsList /> 
+          : 
+          <BillsList
+            allBills={allBills}
+            removeBill={removeBill}
+            sortByName={sortByName}
+            sortByAmount={sortByAmount}
+            sortByDate={sortByDate}
+            handleChange={handleChange}
+          />
+      }
       <h1>Add a new bill</h1>
       <form onSubmit={createBill}>
         <div className="form-inputs">

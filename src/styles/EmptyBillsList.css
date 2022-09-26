@@ -1,0 +1,6 @@
+.emptyBillsList {
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    background-color: #EEE5E9;
+}

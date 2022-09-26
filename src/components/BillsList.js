@@ -34,31 +34,33 @@ function BillsList(props) {
   })
 
   return (
-    <table >
-      <thead>
-        <tr>
-          <th></th>
-          {/* <th>
-            <h3>Paid?</h3>
-          </th> */}
-          <th className="left-align">
-            <h3>Bill Name</h3>
-            <button onClick={() => props.sortByName()}>Sort</button>  
-          </th>
-          <th className="right-align">
-            <h3>Amount Due</h3>
-            <button onClick={() => props.sortByAmount()}>Sort</button>
-          </th>
-          <th className="right-align">
-            <h3>Due Date</h3>
-            <button onClick={() => props.sortByDate()}>Sort</button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {billsList}
-      </tbody>
-    </table>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            {/* <th>
+              <h3>Paid?</h3>
+            </th> */}
+            <th className="left-align">
+              <h3>Bill Name</h3>
+              <button onClick={() => props.sortByName()}>Sort</button>  
+            </th>
+            <th className="right-align">
+              <h3>Amount Due</h3>
+              <button onClick={() => props.sortByAmount()}>Sort</button>
+            </th>
+            <th className="right-align">
+              <h3>Due Date</h3>
+              <button onClick={() => props.sortByDate()}>Sort</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {billsList}
+        </tbody>
+      </table>
+    </div>
   )
 }
 

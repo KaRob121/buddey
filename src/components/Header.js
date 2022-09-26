@@ -2,7 +2,7 @@ import '../styles/Header.css'
 
 function Header() {
   return (
-    <header>
+    <header data-testid="Header">
       <div className="Header--logo">
         <h2>Buddey</h2>        
         <img width="25px" height="25px"></img>
