@@ -1,35 +1,26 @@
-/* .BillsList--header {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 100px;
-}
-
-.BillsList--bill {
-    display: flex;
-}
-
-.BillsList--billInfo {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-} */
-
-/* .BillsList--billInfo {
+.heading-row {
     display: grid;
-    width: 75%;
-} */
-
-table {
-    margin: 0 auto;
-    width: 75%
+    grid-template-columns: 50px 1fr 1fr 1fr;
+    align-items: center;
 }
 
-th > h3, button {
+.heading-item:first-child {
+    grid-column-start: 2;
+}
+
+.heading-item > h3, button {
     display: inline;
 }
 
-tr {
-    width: 100%;
+.BillsList--bill {
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr 1fr;
+    align-items: center;
+}
+
+.bill-item button {
+    float: right;
+    margin-right: 10px
 }
 
 .left-align {
@@ -39,10 +30,6 @@ tr {
 .right-align {
     text-align: right;
 }
-/* 
-.bg-normal {
-    background-color: #FFFFFF;
-} */
 
 .bg-hover {
     background-color: #F0F0F0;

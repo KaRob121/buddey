@@ -10,6 +10,9 @@ function billMouseOutHandler(event) {
   event.currentTarget.classList.toggle("bg-hover")
 }
 
+function billClickHandler(event) {
+}
+
 function BillsList(props) {
   const billsList = props.allBills.map((bill, ind) => {
     const currencyFormatter = new Intl.NumberFormat('en-US', {
@@ -17,52 +20,48 @@ function BillsList(props) {
       currency: 'USD',
     });
     return (
-      <tr 
-        className="BillsList--bill" 
-        key={bill.bill_id} 
-        onMouseOver={billMouseOverHandler} 
+      <div
+        className="BillsList--bill"
+        key={bill.bill_id}
+        onMouseOver={billMouseOverHandler}
         onMouseOut={billMouseOutHandler}
+        onClick={billClickHandler}
       >
-        <td>
+        <div className="bill-item">
           <button onClick={() => props.removeBill(bill.bill_id)}>x</button>
-        </td>
-        <td>
+        </div>
+        <div className="bill-item">
           <h3>{bill.name}</h3>
-        </td>
-        <td className="right-align">
+        </div>
+        <div className="bill-item right-align">
           <h3>{bill.amount_due}</h3>
-        </td>
-        <td className="right-align">
+        </div>
+        <div className="bill-item right-align">
           <h3>{new Date(bill.due_date).toLocaleDateString("en-US")}</h3>
-        </td>
-      </tr>
+        </div>
+      </div>
     )
   })
 
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th className="left-align">
-              <h3>Bill Name</h3>
-              <button onClick={() => props.sortByName()}>Sort</button>  
-            </th>
-            <th className="right-align">
-              <h3>Amount Due</h3>
-              <button onClick={() => props.sortByAmount()}>Sort</button>
-            </th>
-            <th className="right-align">
-              <h3>Due Date</h3>
-              <button onClick={() => props.sortByDate()}>Sort</button>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {billsList}
-        </tbody>
-      </table>
+      <div className="heading-row">
+        <div className="heading-item left-align">
+          <h3>Bill Name</h3>
+          <button onClick={() => props.sortByName()}>Sort</button>
+        </div>
+        <div className="heading-item right-align">
+          <h3>Amount Due</h3>
+          <button onClick={() => props.sortByAmount()}>Sort</button>
+        </div>
+        <div className="heading-item right-align">
+          <h3>Due Date</h3>
+          <button onClick={() => props.sortByDate()}>Sort</button>
+        </div>
+      </div>
+      <div>
+        {billsList}
+      </div>
     </div>
   )
 }
