@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import BillsList from './BillsList'
 import EmptyBillsList from './EmptyBillsList'
+import AddBillForm from './AddBillForm'
 import '../styles/Bills.css'
 
 function Bills() {
@@ -19,7 +20,7 @@ function Bills() {
 
   async function getBills() {
     try {
-      const response = await fetch ("http://localhost:3001/bills")
+      const response = await fetch("http://localhost:3001/bills")
       const jsonData = await response.json()
 
       setAllBills(jsonData)
@@ -75,7 +76,7 @@ function Bills() {
   // Purpose: Sorts the bill list by name.
   function sortByName(ind) {
     setAllBills(prevAllBills => {
-      const sortedByName = [...prevAllBills].sort((a,b) => {
+      const sortedByName = [...prevAllBills].sort((a, b) => {
         return a.name >= b.name ? 1 : -1
       })
       return sortedByName
@@ -86,9 +87,9 @@ function Bills() {
   // Purpose: Sorts the bill list by amount due.
   function sortByAmount(ind) {
     setAllBills(prevAllBills => {
-      const sortedByAmount = [...prevAllBills].sort((a,b) => {
-        let currAsNumber1 = Number(a.amount_due.replace(/[^0-9.-]+/g,""))
-        let currAsNumber2 = Number(b.amount_due.replace(/[^0-9.-]+/g,""))
+      const sortedByAmount = [...prevAllBills].sort((a, b) => {
+        let currAsNumber1 = Number(a.amount_due.replace(/[^0-9.-]+/g, ""))
+        let currAsNumber2 = Number(b.amount_due.replace(/[^0-9.-]+/g, ""))
         return currAsNumber1 - currAsNumber2
       })
       return sortedByAmount
@@ -99,7 +100,7 @@ function Bills() {
   // Purpose: Sorts the bill list by due date.
   function sortByDate(ind) {
     setAllBills(prevAllBills => {
-      const sortedByDate = [...prevAllBills].sort((a,b) => {
+      const sortedByDate = [...prevAllBills].sort((a, b) => {
         return a.due_date >= b.due_date ? 1 : -1
       })
       return sortedByDate
@@ -120,9 +121,9 @@ function Bills() {
     <div className="Bills">
       <h1>Bills</h1>
       {
-        allBills.length == 0 ? 
-          <EmptyBillsList /> 
-          : 
+        allBills.length == 0 ?
+          <EmptyBillsList />
+          :
           <BillsList
             allBills={allBills}
             removeBill={removeBill}
@@ -132,36 +133,11 @@ function Bills() {
             handleChange={handleChange}
           />
       }
-      <h1>Add a new bill</h1>
-      <form onSubmit={createBill}>
-        <div className="form-inputs">
-          <input
-            type="text"
-            placeholder="Bill Name"
-            name="name"
-            value={bill.billName}
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            step="0.01"
-            placeholder="Amount Due"
-            name="amountDue"
-            value={bill.amountDue}
-            onChange={handleChange}
-          />
-          <input
-            type="date"
-            placeholder="Due Date"
-            name="dueDate"
-            value={bill.dueDate}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Add a new bill</button>
-      </form>
-      
-      
+      <AddBillForm
+        bill={bill}
+        createBill={createBill}
+        handleChange={handleChange}
+      />
     </div>
   )
 }
