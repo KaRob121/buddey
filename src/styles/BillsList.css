@@ -39,3 +39,11 @@ tr {
 .right-align {
     text-align: right;
 }
+/* 
+.bg-normal {
+    background-color: #FFFFFF;
+} */
+
+.bg-hover {
+    background-color: #F0F0F0;
+}

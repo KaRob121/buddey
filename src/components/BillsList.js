@@ -1,5 +1,14 @@
 import React from 'react'
+import MoreBillInfo from './MoreBillInfo'
 import '../styles/BillsList.css'
+
+function billMouseOverHandler(event) {
+  event.currentTarget.classList.toggle("bg-hover")
+}
+
+function billMouseOutHandler(event) {
+  event.currentTarget.classList.toggle("bg-hover")
+}
 
 function BillsList(props) {
   const billsList = props.allBills.map((bill, ind) => {
@@ -8,18 +17,15 @@ function BillsList(props) {
       currency: 'USD',
     });
     return (
-      <tr className="BillsList--bill" key={bill.bill_id}>
+      <tr 
+        className="BillsList--bill" 
+        key={bill.bill_id} 
+        onMouseOver={billMouseOverHandler} 
+        onMouseOut={billMouseOutHandler}
+      >
         <td>
           <button onClick={() => props.removeBill(bill.bill_id)}>x</button>
         </td>
-        {/* <td>
-          <input
-            type="checkbox"
-            name="name"
-            value={bill.status}
-            onChange={props.handleChange}
-          />
-        </td> */}
         <td>
           <h3>{bill.name}</h3>
         </td>
@@ -39,9 +45,6 @@ function BillsList(props) {
         <thead>
           <tr>
             <th></th>
-            {/* <th>
-              <h3>Paid?</h3>
-            </th> */}
             <th className="left-align">
               <h3>Bill Name</h3>
               <button onClick={() => props.sortByName()}>Sort</button>  

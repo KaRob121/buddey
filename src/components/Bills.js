@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import BillsList from './BillsList'
 import EmptyBillsList from './EmptyBillsList'
 import AddBillForm from './AddBillForm'
+import MoreBillInfo from './MoreBillInfo'
 import '../styles/Bills.css'
 
 function Bills() {
